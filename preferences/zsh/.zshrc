@@ -39,6 +39,7 @@ alias mgg="$HOME/mg/bin/mg g"
 alias cat="bat"
 alias cal="open 'https://calendar.google.com/calendar/u/0/r'"
 alias youtu="open 'https://www.youtube.com'"
+alias ls="eza --icons"
 
 # IDE-like tmux layout (상단 1개, 하단 3개)
 ide() {
