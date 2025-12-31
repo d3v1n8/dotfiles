@@ -27,6 +27,7 @@ source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 alias mg="$HOME/mg/bin/mg"
 alias mgb="$HOME/mg/bin/mg b"
 alias mgg="$HOME/mg/bin/mg g"
+alias cat="bat"
 
 # jenv
 export PATH="$HOME/.jenv/bin:$PATH"

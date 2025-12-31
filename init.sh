@@ -72,6 +72,7 @@ install_cli_tools() {
     CLI_TOOLS=(
         "tmux"
         "powerlevel10k"
+        "bat"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do
