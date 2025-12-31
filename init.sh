@@ -117,6 +117,7 @@ install_cli_tools() {
         "fzf"
         "zoxide"
         "eza"
+        "lazygit"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do
