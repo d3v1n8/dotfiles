@@ -7,19 +7,35 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "=== Mac 초기 설정 스크립트 ==="
 echo ""
 
+# Xcode Command Line Tools 설치 확인
+check_xcode_clt() {
+    if ! xcode-select -p &> /dev/null; then
+        echo "[0/4] Xcode Command Line Tools 설치 중..."
+        xcode-select --install
+        echo ""
+        echo "⚠️  Xcode Command Line Tools 설치 팝업이 표시됩니다."
+        echo "    설치 완료 후 이 스크립트를 다시 실행해주세요."
+        exit 1
+    else
+        echo "[0/4] Xcode Command Line Tools 이미 설치됨"
+    fi
+}
+
 # Homebrew 설치 확인 및 설치
 install_homebrew() {
     if ! command -v brew &> /dev/null; then
         echo "[1/4] Homebrew 설치 중..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-        # Apple Silicon Mac인 경우 PATH 설정
-        if [[ $(uname -m) == "arm64" ]]; then
-            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-            eval "$(/opt/homebrew/bin/brew shellenv)"
-        fi
     else
         echo "[1/4] Homebrew 이미 설치됨"
+    fi
+
+    # Apple Silicon Mac인 경우 PATH 설정
+    if [[ $(uname -m) == "arm64" ]]; then
+        export PATH="/opt/homebrew/bin:$PATH"
+        if ! grep -q 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile 2>/dev/null; then
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+        fi
     fi
 }
 
@@ -110,6 +126,7 @@ link_configs() {
 
 # 메인 실행
 main() {
+    check_xcode_clt
     install_homebrew
     install_apps
     install_cli_tools
