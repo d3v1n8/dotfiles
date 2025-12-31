@@ -93,6 +93,7 @@ install_apps() {
         "figma"
         "claude"
         "topnotch"
+        "font-meslo-lg-nerd-font"
     )
 
     for app in "${CASK_APPS[@]}"; do

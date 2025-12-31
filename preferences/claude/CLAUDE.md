@@ -8,23 +8,23 @@
 Use this format:
 
 ```
-📝 **Language tip:**
+📝 Language Tip
 
-> 🇰🇷 **원문:** (original Korean command)
+🇰🇷 원문
+(original Korean command)
 
-🇺🇸 **English**
-`English translation here`
+🇺🇸 English
+English translation here
 
-🇨🇳 **中文**
-`中文翻译` _(pīnyīn)_
+🇨🇳 中文
+中文翻译 (pīnyīn)
 
-🇯🇵 **日本語**
-`日本語訳` _(romaji)_
+🇯🇵 日本語
+日本語訳 (romaji)
 ```
 
 - Keep explanations brief and helpful
-- Use blockquote for Korean original
-- Use inline code for translations
+- Use inline code for all languages
 - Use italic for pronunciations
 
 ## Git Commit Rules
