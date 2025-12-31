@@ -29,6 +29,9 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # fzf
 source <(fzf --zsh)
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # Aliases
 alias mg="$HOME/mg/bin/mg"
 alias mgb="$HOME/mg/bin/mg b"

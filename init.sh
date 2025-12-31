@@ -110,6 +110,7 @@ install_cli_tools() {
         "bat"
         "zsh-autosuggestions"
         "fzf"
+        "zoxide"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do
