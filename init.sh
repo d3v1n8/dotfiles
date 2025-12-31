@@ -79,29 +79,31 @@ install_cli_tools() {
 link_configs() {
     echo "[4/4] 설정 파일 링크 중..."
 
+    PREFS_DIR="$DOTFILES_DIR/preferences"
+
     # tmux 설정
-    if [ -f "$DOTFILES_DIR/tmux/.tmux.conf" ]; then
-        ln -sf "$DOTFILES_DIR/tmux/.tmux.conf" ~/.tmux.conf
+    if [ -f "$PREFS_DIR/tmux/.tmux.conf" ]; then
+        ln -sf "$PREFS_DIR/tmux/.tmux.conf" ~/.tmux.conf
         echo "  ✓ tmux 설정 링크됨"
     fi
 
     # tmux powerline 설정
     mkdir -p ~/.config/tmux
-    if [ -f "$DOTFILES_DIR/tmux/.tmux.powerline.conf" ]; then
-        ln -sf "$DOTFILES_DIR/tmux/.tmux.powerline.conf" ~/.config/tmux/.tmux.powerline.conf
+    if [ -f "$PREFS_DIR/tmux/.tmux.powerline.conf" ]; then
+        ln -sf "$PREFS_DIR/tmux/.tmux.powerline.conf" ~/.config/tmux/.tmux.powerline.conf
         echo "  ✓ tmux powerline 설정 링크됨"
     fi
 
     # iTerm2 설정 복원
-    if [ -f "$DOTFILES_DIR/iterm/com.googlecode.iterm2.plist" ]; then
-        cp "$DOTFILES_DIR/iterm/com.googlecode.iterm2.plist" ~/Library/Preferences/com.googlecode.iterm2.plist
+    if [ -f "$PREFS_DIR/iterm/com.googlecode.iterm2.plist" ]; then
+        cp "$PREFS_DIR/iterm/com.googlecode.iterm2.plist" ~/Library/Preferences/com.googlecode.iterm2.plist
         echo "  ✓ iTerm2 설정 복원됨"
         echo "    (iTerm2를 재시작하면 설정이 적용됩니다)"
     fi
 
     # ideavimrc 설정
-    if [ -f "$DOTFILES_DIR/.ideavimrc" ]; then
-        ln -sf "$DOTFILES_DIR/.ideavimrc" ~/.ideavimrc
+    if [ -f "$PREFS_DIR/.ideavimrc" ]; then
+        ln -sf "$PREFS_DIR/.ideavimrc" ~/.ideavimrc
         echo "  ✓ ideavimrc 설정 링크됨"
     fi
 }
