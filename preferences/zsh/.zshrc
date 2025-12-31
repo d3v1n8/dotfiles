@@ -37,6 +37,7 @@ alias mg="$HOME/mg/bin/mg"
 alias mgb="$HOME/mg/bin/mg b"
 alias mgg="$HOME/mg/bin/mg g"
 alias cat="bat"
+alias cal="open 'https://calendar.google.com/calendar/u/0/r'"
 
 # IDE-like tmux layout (상단 1개, 하단 3개)
 ide() {
