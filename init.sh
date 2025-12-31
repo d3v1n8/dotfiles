@@ -116,6 +116,7 @@ install_cli_tools() {
         "zsh-autosuggestions"
         "fzf"
         "zoxide"
+        "eza"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do
