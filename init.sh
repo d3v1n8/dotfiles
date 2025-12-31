@@ -65,12 +65,13 @@ install_apps() {
     done
 }
 
-# CLI 도구 설치 (tmux 포함)
+# CLI 도구 설치 (tmux, powerlevel10k 포함)
 install_cli_tools() {
     echo "[3/4] CLI 도구 설치 중..."
 
     CLI_TOOLS=(
         "tmux"
+        "powerlevel10k"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do
@@ -81,6 +82,14 @@ install_cli_tools() {
             brew install "$tool" || echo "  ⚠ $tool 설치 실패"
         fi
     done
+
+    # Oh My Zsh 설치
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        echo "  → Oh My Zsh 설치 중..."
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    else
+        echo "  ✓ Oh My Zsh 이미 설치됨"
+    fi
 
     # TPM (Tmux Plugin Manager) 설치
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
@@ -122,6 +131,18 @@ link_configs() {
         ln -sf "$PREFS_DIR/.ideavimrc" ~/.ideavimrc
         echo "  ✓ ideavimrc 설정 링크됨"
     fi
+
+    # zsh 설정
+    if [ -f "$PREFS_DIR/zsh/.zshrc" ]; then
+        ln -sf "$PREFS_DIR/zsh/.zshrc" ~/.zshrc
+        echo "  ✓ zshrc 설정 링크됨"
+    fi
+
+    # powerlevel10k 설정
+    if [ -f "$PREFS_DIR/zsh/.p10k.zsh" ]; then
+        ln -sf "$PREFS_DIR/zsh/.p10k.zsh" ~/.p10k.zsh
+        echo "  ✓ p10k 설정 링크됨"
+    fi
 }
 
 # 메인 실행
@@ -136,8 +157,9 @@ main() {
     echo "=== 설치 완료 ==="
     echo ""
     echo "추가 작업:"
-    echo "  1. iTerm2 재시작하여 설정 적용"
-    echo "  2. tmux 실행 후 prefix + I 로 플러그인 설치"
+    echo "  1. 터미널 재시작하여 zsh/p10k 설정 적용"
+    echo "  2. iTerm2 재시작하여 설정 적용"
+    echo "  3. tmux 실행 후 prefix + I 로 플러그인 설치"
     echo ""
 }
 
