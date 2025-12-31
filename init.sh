@@ -18,6 +18,7 @@ show_usage() {
     echo "  link:zshrc   zshrc 설정 리셋"
     echo "  link:ideavim ideaVim 설정 리셋"
     echo "  link:tmux    tmux 설정 리셋"
+    echo "  link:claude  Claude 설정 리셋"
     echo "  help         도움말 출력"
     echo ""
 }
@@ -198,6 +199,21 @@ link_tmux() {
     fi
 }
 
+link_claude() {
+    echo "[link] Claude 설정 리셋 중..."
+    mkdir -p ~/.claude
+    if [ -f "$PREFS_DIR/claude/CLAUDE.md" ]; then
+        ln -sf "$PREFS_DIR/claude/CLAUDE.md" ~/.claude/CLAUDE.md
+        echo "  ✓ Claude 설정 링크됨"
+    else
+        echo "  ⚠ Claude 설정 파일을 찾을 수 없습니다"
+    fi
+    if [ -f "$PREFS_DIR/claude/settings.local.json" ]; then
+        ln -sf "$PREFS_DIR/claude/settings.local.json" ~/.claude/settings.local.json
+        echo "  ✓ Claude settings 링크됨"
+    fi
+}
+
 # 전체 설정 파일 링크
 link_configs() {
     echo "[link] 전체 설정 파일 링크 중..."
@@ -205,6 +221,7 @@ link_configs() {
     link_iterm
     link_ideavim
     link_zshrc
+    link_claude
 }
 
 # 설정 파일 링크 서브메뉴
@@ -216,7 +233,8 @@ show_link_menu() {
     echo "  2) zshrc 설정 리셋"
     echo "  3) ideaVim 설정 리셋"
     echo "  4) tmux 설정 리셋"
-    echo "  5) 전체 설정 링크"
+    echo "  5) Claude 설정 리셋"
+    echo "  6) 전체 설정 링크"
     echo "  b) 뒤로 가기"
     echo ""
     read -p "선택: " link_choice
@@ -226,7 +244,8 @@ show_link_menu() {
         2) link_zshrc ;;
         3) link_ideavim ;;
         4) link_tmux ;;
-        5) link_configs ;;
+        5) link_claude ;;
+        6) link_configs ;;
         b|B) return ;;
         *) echo "잘못된 선택입니다." ;;
     esac
@@ -314,6 +333,9 @@ else
             ;;
         link:tmux)
             link_tmux
+            ;;
+        link:claude)
+            link_claude
             ;;
         help|--help|-h)
             show_usage

@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(chmod:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git mv:*)",
+      "Bash(brew install:*)",
+      "Bash(alias cat:*)",
+      "Bash(./init.sh:*)",
+      "Bash(ln:*)",
+      "Bash(defaults read:*)",
+      "Bash(defaults write com.googlecode.iterm2 TabStyleWithAutomaticOption -int 4)",
+      "Bash(defaults write:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(powerline-config tmux:*)",
+      "Bash(pip show:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(/usr/bin/python3:*)",
+      "Bash(brew list:*)",
+      "Bash(pip3 show:*)",
+      "Bash(source ~/.zshrc)",
+      "Bash(tmux list-sessions:*)"
+    ]
+  }
+}
