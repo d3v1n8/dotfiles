@@ -9,12 +9,16 @@ show_usage() {
     echo "사용법: ./init.sh [명령어]"
     echo ""
     echo "명령어:"
-    echo "  all      전체 설치 (기본값)"
-    echo "  brew     Homebrew 설치"
-    echo "  apps     GUI 앱 설치 (iterm, chrome, ...)"
-    echo "  cli      CLI 도구 설치 (tmux, bat, fzf, ...)"
-    echo "  link     설정 파일 링크"
-    echo "  help     도움말 출력"
+    echo "  all          전체 설치 (기본값)"
+    echo "  brew         Homebrew 설치"
+    echo "  apps         GUI 앱 설치 (iterm, chrome, ...)"
+    echo "  cli          CLI 도구 설치 (tmux, bat, fzf, ...)"
+    echo "  link         전체 설정 파일 링크"
+    echo "  link:iterm   iTerm2 설정 리셋"
+    echo "  link:zshrc   zshrc 설정 리셋"
+    echo "  link:ideavim ideaVim 설정 리셋"
+    echo "  link:tmux    tmux 설정 리셋"
+    echo "  help         도움말 출력"
     echo ""
 }
 
@@ -139,49 +143,93 @@ install_cli_tools() {
     fi
 }
 
-# 설정 파일 링크
-link_configs() {
-    echo "[link] 설정 파일 링크 중..."
+# 설정 파일 링크 - 개별 함수들
+PREFS_DIR="$DOTFILES_DIR/preferences"
 
-    PREFS_DIR="$DOTFILES_DIR/preferences"
+link_iterm() {
+    echo "[link] iTerm2 설정 리셋 중..."
+    if [ -f "$PREFS_DIR/iterm/com.googlecode.iterm2.plist" ]; then
+        cp "$PREFS_DIR/iterm/com.googlecode.iterm2.plist" ~/Library/Preferences/com.googlecode.iterm2.plist
+        echo "  ✓ iTerm2 설정 복원됨"
+        echo "    (iTerm2를 재시작하면 설정이 적용됩니다)"
+    else
+        echo "  ⚠ iTerm2 설정 파일을 찾을 수 없습니다"
+    fi
+}
 
-    # tmux 설정
+link_zshrc() {
+    echo "[link] zshrc 설정 리셋 중..."
+    if [ -f "$PREFS_DIR/zsh/.zshrc" ]; then
+        ln -sf "$PREFS_DIR/zsh/.zshrc" ~/.zshrc
+        echo "  ✓ zshrc 설정 링크됨"
+    else
+        echo "  ⚠ zshrc 설정 파일을 찾을 수 없습니다"
+    fi
+
+    if [ -f "$PREFS_DIR/zsh/.p10k.zsh" ]; then
+        ln -sf "$PREFS_DIR/zsh/.p10k.zsh" ~/.p10k.zsh
+        echo "  ✓ p10k 설정 링크됨"
+    fi
+}
+
+link_ideavim() {
+    echo "[link] ideaVim 설정 리셋 중..."
+    if [ -f "$PREFS_DIR/.ideavimrc" ]; then
+        ln -sf "$PREFS_DIR/.ideavimrc" ~/.ideavimrc
+        echo "  ✓ ideavimrc 설정 링크됨"
+    else
+        echo "  ⚠ ideavimrc 설정 파일을 찾을 수 없습니다"
+    fi
+}
+
+link_tmux() {
+    echo "[link] tmux 설정 리셋 중..."
     if [ -f "$PREFS_DIR/tmux/.tmux.conf" ]; then
         ln -sf "$PREFS_DIR/tmux/.tmux.conf" ~/.tmux.conf
         echo "  ✓ tmux 설정 링크됨"
+    else
+        echo "  ⚠ tmux 설정 파일을 찾을 수 없습니다"
     fi
 
-    # tmux powerline 설정
     mkdir -p ~/.config/tmux
     if [ -f "$PREFS_DIR/tmux/.tmux.powerline.conf" ]; then
         ln -sf "$PREFS_DIR/tmux/.tmux.powerline.conf" ~/.config/tmux/.tmux.powerline.conf
         echo "  ✓ tmux powerline 설정 링크됨"
     fi
+}
 
-    # iTerm2 설정 복원
-    if [ -f "$PREFS_DIR/iterm/com.googlecode.iterm2.plist" ]; then
-        cp "$PREFS_DIR/iterm/com.googlecode.iterm2.plist" ~/Library/Preferences/com.googlecode.iterm2.plist
-        echo "  ✓ iTerm2 설정 복원됨"
-        echo "    (iTerm2를 재시작하면 설정이 적용됩니다)"
-    fi
+# 전체 설정 파일 링크
+link_configs() {
+    echo "[link] 전체 설정 파일 링크 중..."
+    link_tmux
+    link_iterm
+    link_ideavim
+    link_zshrc
+}
 
-    # ideavimrc 설정
-    if [ -f "$PREFS_DIR/.ideavimrc" ]; then
-        ln -sf "$PREFS_DIR/.ideavimrc" ~/.ideavimrc
-        echo "  ✓ ideavimrc 설정 링크됨"
-    fi
+# 설정 파일 링크 서브메뉴
+show_link_menu() {
+    echo ""
+    echo "설정 파일 리셋 메뉴:"
+    echo ""
+    echo "  1) iTerm2 설정 리셋"
+    echo "  2) zshrc 설정 리셋"
+    echo "  3) ideaVim 설정 리셋"
+    echo "  4) tmux 설정 리셋"
+    echo "  5) 전체 설정 링크"
+    echo "  b) 뒤로 가기"
+    echo ""
+    read -p "선택: " link_choice
 
-    # zsh 설정
-    if [ -f "$PREFS_DIR/zsh/.zshrc" ]; then
-        ln -sf "$PREFS_DIR/zsh/.zshrc" ~/.zshrc
-        echo "  ✓ zshrc 설정 링크됨"
-    fi
-
-    # powerlevel10k 설정
-    if [ -f "$PREFS_DIR/zsh/.p10k.zsh" ]; then
-        ln -sf "$PREFS_DIR/zsh/.p10k.zsh" ~/.p10k.zsh
-        echo "  ✓ p10k 설정 링크됨"
-    fi
+    case "$link_choice" in
+        1) link_iterm ;;
+        2) link_zshrc ;;
+        3) link_ideavim ;;
+        4) link_tmux ;;
+        5) link_configs ;;
+        b|B) return ;;
+        *) echo "잘못된 선택입니다." ;;
+    esac
 }
 
 # 완료 메시지
@@ -228,7 +276,7 @@ show_menu() {
         2) check_xcode_clt && install_homebrew ;;
         3) install_apps ;;
         4) install_cli_tools ;;
-        5) link_configs ;;
+        5) show_link_menu ;;
         q|Q) echo "종료합니다." && exit 0 ;;
         *) echo "잘못된 선택입니다." && exit 1 ;;
     esac
@@ -254,6 +302,18 @@ else
             ;;
         link)
             link_configs
+            ;;
+        link:iterm)
+            link_iterm
+            ;;
+        link:zshrc)
+            link_zshrc
+            ;;
+        link:ideavim)
+            link_ideavim
+            ;;
+        link:tmux)
+            link_tmux
             ;;
         help|--help|-h)
             show_usage

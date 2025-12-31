@@ -38,6 +38,22 @@ alias mgb="$HOME/mg/bin/mg b"
 alias mgg="$HOME/mg/bin/mg g"
 alias cat="bat"
 
+# IDE-like tmux layout (상단 1개, 하단 3개)
+ide() {
+    local session_name="${1:-ide}"
+
+    if tmux has-session -t "$session_name" 2>/dev/null; then
+        tmux attach-session -t "$session_name"
+    else
+        tmux new-session -d -s "$session_name"
+        tmux split-window -v -p 30
+        tmux split-window -h -p 66
+        tmux split-window -h -p 50
+        tmux select-pane -t 0
+        tmux attach-session -t "$session_name"
+    fi
+}
+
 # jenv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
