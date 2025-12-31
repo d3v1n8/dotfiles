@@ -4,30 +4,41 @@ set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "=== Mac 초기 설정 스크립트 ==="
-echo ""
+# 사용법 출력
+show_usage() {
+    echo "사용법: ./init.sh [명령어]"
+    echo ""
+    echo "명령어:"
+    echo "  all      전체 설치 (기본값)"
+    echo "  brew     Homebrew 설치"
+    echo "  apps     GUI 앱 설치 (iterm, chrome, ...)"
+    echo "  cli      CLI 도구 설치 (tmux, bat, fzf, ...)"
+    echo "  link     설정 파일 링크"
+    echo "  help     도움말 출력"
+    echo ""
+}
 
 # Xcode Command Line Tools 설치 확인
 check_xcode_clt() {
     if ! xcode-select -p &> /dev/null; then
-        echo "[0/4] Xcode Command Line Tools 설치 중..."
+        echo "[xcode] Xcode Command Line Tools 설치 중..."
         xcode-select --install
         echo ""
         echo "⚠️  Xcode Command Line Tools 설치 팝업이 표시됩니다."
         echo "    설치 완료 후 이 스크립트를 다시 실행해주세요."
         exit 1
     else
-        echo "[0/4] Xcode Command Line Tools 이미 설치됨"
+        echo "[xcode] Xcode Command Line Tools 이미 설치됨"
     fi
 }
 
 # Homebrew 설치 확인 및 설치
 install_homebrew() {
     if ! command -v brew &> /dev/null; then
-        echo "[1/4] Homebrew 설치 중..."
+        echo "[brew] Homebrew 설치 중..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     else
-        echo "[1/4] Homebrew 이미 설치됨"
+        echo "[brew] Homebrew 이미 설치됨"
     fi
 
     # Apple Silicon Mac인 경우 PATH 설정
@@ -65,7 +76,7 @@ is_app_installed() {
 
 # Brew Cask 앱 설치
 install_apps() {
-    echo "[2/4] 앱 설치 중..."
+    echo "[apps] 앱 설치 중..."
 
     # Cask 앱 목록
     CASK_APPS=(
@@ -91,7 +102,7 @@ install_apps() {
 
 # CLI 도구 설치 (tmux, powerlevel10k 포함)
 install_cli_tools() {
-    echo "[3/4] CLI 도구 설치 중..."
+    echo "[cli] CLI 도구 설치 중..."
 
     CLI_TOOLS=(
         "tmux"
@@ -129,7 +140,7 @@ install_cli_tools() {
 
 # 설정 파일 링크
 link_configs() {
-    echo "[4/4] 설정 파일 링크 중..."
+    echo "[link] 설정 파일 링크 중..."
 
     PREFS_DIR="$DOTFILES_DIR/preferences"
 
@@ -172,14 +183,8 @@ link_configs() {
     fi
 }
 
-# 메인 실행
-main() {
-    check_xcode_clt
-    install_homebrew
-    install_apps
-    install_cli_tools
-    link_configs
-
+# 완료 메시지
+show_complete() {
     echo ""
     echo "=== 설치 완료 ==="
     echo ""
@@ -190,4 +195,43 @@ main() {
     echo ""
 }
 
-main
+# 전체 설치
+run_all() {
+    echo "=== Mac 초기 설정 스크립트 ==="
+    echo ""
+    check_xcode_clt
+    install_homebrew
+    install_apps
+    install_cli_tools
+    link_configs
+    show_complete
+}
+
+# 메인 실행
+case "${1:-all}" in
+    all)
+        run_all
+        ;;
+    brew)
+        check_xcode_clt
+        install_homebrew
+        ;;
+    apps)
+        install_apps
+        ;;
+    cli)
+        install_cli_tools
+        ;;
+    link)
+        link_configs
+        ;;
+    help|--help|-h)
+        show_usage
+        ;;
+    *)
+        echo "알 수 없는 명령어: $1"
+        echo ""
+        show_usage
+        exit 1
+        ;;
+esac
