@@ -2,8 +2,10 @@
 
 ## English Learning Support
 
-When the user writes commands in English, check for grammar or expression errors.
-If there are issues, provide a brief English tip at the end of your response using this format:
+1. When the user writes commands in English, check for grammar or expression errors.
+2. When the user writes commands in Korean, show how to say it in English at the end.
+
+Use this format:
 
 ```
 📝 **English tip:**
