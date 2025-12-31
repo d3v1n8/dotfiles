@@ -9,15 +9,23 @@ Use this format:
 
 ```
 📝 **Language tip:**
-🇰🇷 (original Korean command)
-🇺🇸 English translation
-🇨🇳 中文翻译
-    (pīnyīn)
-🇯🇵 日本語訳
-    (romaji)
+
+> 🇰🇷 **원문:** (original Korean command)
+
+🇺🇸 **English**
+`English translation here`
+
+🇨🇳 **中文**
+`中文翻译` _(pīnyīn)_
+
+🇯🇵 **日本語**
+`日本語訳` _(romaji)_
 ```
 
 - Keep explanations brief and helpful
+- Use blockquote for Korean original
+- Use inline code for translations
+- Use italic for pronunciations
 
 ## Git Commit Rules
 
