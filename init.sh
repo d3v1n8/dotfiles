@@ -39,6 +39,30 @@ install_homebrew() {
     fi
 }
 
+# 앱이 이미 설치되어 있는지 확인
+is_app_installed() {
+    local cask_name="$1"
+
+    # brew로 설치된 경우
+    if brew list --cask "$cask_name" &> /dev/null; then
+        return 0
+    fi
+
+    # /Applications에 직접 설치된 경우 확인
+    case "$cask_name" in
+        "iterm2") [ -d "/Applications/iTerm.app" ] && return 0 ;;
+        "google-chrome") [ -d "/Applications/Google Chrome.app" ] && return 0 ;;
+        "discord") [ -d "/Applications/Discord.app" ] && return 0 ;;
+        "slack") [ -d "/Applications/Slack.app" ] && return 0 ;;
+        "zoom") [ -d "/Applications/zoom.us.app" ] && return 0 ;;
+        "figma") [ -d "/Applications/Figma.app" ] && return 0 ;;
+        "claude") [ -d "/Applications/Claude.app" ] && return 0 ;;
+        "topnotch") [ -d "/Applications/TopNotch.app" ] && return 0 ;;
+    esac
+
+    return 1
+}
+
 # Brew Cask 앱 설치
 install_apps() {
     echo "[2/4] 앱 설치 중..."
@@ -56,7 +80,7 @@ install_apps() {
     )
 
     for app in "${CASK_APPS[@]}"; do
-        if brew list --cask "$app" &> /dev/null; then
+        if is_app_installed "$app"; then
             echo "  ✓ $app 이미 설치됨"
         else
             echo "  → $app 설치 중..."
