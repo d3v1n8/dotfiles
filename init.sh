@@ -207,31 +207,61 @@ run_all() {
     show_complete
 }
 
+# 인터랙티브 메뉴
+show_menu() {
+    echo "=== Mac 초기 설정 스크립트 ==="
+    echo ""
+    echo "실행할 작업을 선택하세요:"
+    echo ""
+    echo "  1) 전체 설치"
+    echo "  2) Homebrew 설치"
+    echo "  3) GUI 앱 설치"
+    echo "  4) CLI 도구 설치"
+    echo "  5) 설정 파일 링크"
+    echo "  q) 종료"
+    echo ""
+    read -p "선택: " choice
+
+    case "$choice" in
+        1) run_all ;;
+        2) check_xcode_clt && install_homebrew ;;
+        3) install_apps ;;
+        4) install_cli_tools ;;
+        5) link_configs ;;
+        q|Q) echo "종료합니다." && exit 0 ;;
+        *) echo "잘못된 선택입니다." && exit 1 ;;
+    esac
+}
+
 # 메인 실행
-case "${1:-all}" in
-    all)
-        run_all
-        ;;
-    brew)
-        check_xcode_clt
-        install_homebrew
-        ;;
-    apps)
-        install_apps
-        ;;
-    cli)
-        install_cli_tools
-        ;;
-    link)
-        link_configs
-        ;;
-    help|--help|-h)
-        show_usage
-        ;;
-    *)
-        echo "알 수 없는 명령어: $1"
-        echo ""
-        show_usage
-        exit 1
-        ;;
-esac
+if [ $# -eq 0 ]; then
+    show_menu
+else
+    case "$1" in
+        all)
+            run_all
+            ;;
+        brew)
+            check_xcode_clt
+            install_homebrew
+            ;;
+        apps)
+            install_apps
+            ;;
+        cli)
+            install_cli_tools
+            ;;
+        link)
+            link_configs
+            ;;
+        help|--help|-h)
+            show_usage
+            ;;
+        *)
+            echo "알 수 없는 명령어: $1"
+            echo ""
+            show_usage
+            exit 1
+            ;;
+    esac
+fi
