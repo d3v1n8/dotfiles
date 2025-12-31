@@ -23,6 +23,12 @@ source $ZSH/oh-my-zsh.sh
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# zsh-autosuggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# fzf
+source <(fzf --zsh)
+
 # Aliases
 alias mg="$HOME/mg/bin/mg"
 alias mgb="$HOME/mg/bin/mg b"

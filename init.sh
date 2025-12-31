@@ -97,6 +97,8 @@ install_cli_tools() {
         "tmux"
         "powerlevel10k"
         "bat"
+        "zsh-autosuggestions"
+        "fzf"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do
