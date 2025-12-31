@@ -9,18 +9,15 @@ Use this format:
 
 ```
 📝 **Language tip:**
-```diff
-- "original sentence with error"
-+ "corrected sentence"
-```
-
-🇨🇳 中文: ... (pinyin)
-🇯🇵 日本語: ... (romaji)
+🇰🇷 (original Korean command)
+🇺🇸 English translation
+🇨🇳 中文翻译
+    (pīnyīn)
+🇯🇵 日本語訳
+    (romaji)
 ```
 
 - Keep explanations brief and helpful
-- Use diff code block format for English corrections
-- Include pinyin for Chinese and romaji for Japanese
 
 ## Git Commit Rules
 
