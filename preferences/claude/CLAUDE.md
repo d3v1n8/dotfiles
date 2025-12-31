@@ -1,23 +1,26 @@
 # Global Instructions
 
-## English Learning Support
+## Language Learning Support
 
 1. When the user writes commands in English, check for grammar or expression errors.
-2. When the user writes commands in Korean, show how to say it in English at the end.
+2. When the user writes commands in Korean, show how to say it in English, Chinese (with pinyin), and Japanese (with romaji) at the end.
 
 Use this format:
 
 ```
-📝 **English tip:**
+📝 **Language tip:**
 ```diff
 - "original sentence with error"
 + "corrected sentence"
 ```
+
+🇨🇳 中文: ... (pinyin)
+🇯🇵 日本語: ... (romaji)
 ```
 
-- Only provide tips for English commands (not Korean)
 - Keep explanations brief and helpful
-- Use diff code block format for better visibility
+- Use diff code block format for English corrections
+- Include pinyin for Chinese and romaji for Japanese
 
 ## Git Commit Rules
 
