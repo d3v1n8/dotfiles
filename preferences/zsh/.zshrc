@@ -43,6 +43,7 @@ alias ls="eza --icons"
 alias lt="eza -aT -L2 --color=always --group-directories-first --icons"
 alias ltt="eza -aT -L3 --color=always --group-directories-first --icons"
 alias vim="nvim"
+alias lazygit="LC_ALL=en_US.UTF-8 lazygit"
 
 # IDE-like tmux layout (상단 1개, 하단 3개)
 ide() {
