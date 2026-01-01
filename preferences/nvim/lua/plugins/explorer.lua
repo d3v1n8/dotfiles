@@ -1,4 +1,12 @@
 return {
+  -- Disable snacks explorer to use Neo-tree
+  {
+    "folke/snacks.nvim",
+    opts = {
+      explorer = { enabled = false },
+    },
+  },
+
   -- Telescope (fuzzy finder)
   {
     "nvim-telescope/telescope.nvim",
