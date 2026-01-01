@@ -150,6 +150,14 @@ install_cli_tools() {
     else
         echo "  ✓ TPM 이미 설치됨"
     fi
+
+    # Claude Code 설치
+    if command -v claude &> /dev/null; then
+        echo "  ✓ Claude Code 이미 설치됨"
+    else
+        echo "  → Claude Code 설치 중..."
+        npm install -g @anthropic-ai/claude-code || echo "  ⚠ Claude Code 설치 실패"
+    fi
 }
 
 # 설정 파일 링크 - 개별 함수들
