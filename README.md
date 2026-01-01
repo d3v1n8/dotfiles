@@ -8,12 +8,13 @@ macOS 초기 설정 자동화 스크립트
 - iTerm2, Google Chrome, Discord, Slack, Zoom, Figma, Claude, TopNotch
 
 ### CLI 도구 (brew)
-- tmux, powerlevel10k, bat, zsh-autosuggestions, fzf, btop
+- tmux, powerlevel10k, bat, zsh-autosuggestions, fzf, btop, neovim
 
 ### 설정 파일
 - `preferences/zsh/` - zsh, powerlevel10k 설정
 - `preferences/tmux/` - tmux 설정
 - `preferences/iterm/` - iTerm2 설정
+- `preferences/nvim/` - Neovim (LazyVim) 설정
 - `preferences/.ideavimrc` - IdeaVim 설정
 
 ## 사용법

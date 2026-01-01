@@ -19,6 +19,7 @@ show_usage() {
     echo "  link:ideavim ideaVim 설정 리셋"
     echo "  link:tmux    tmux 설정 리셋"
     echo "  link:claude  Claude 설정 리셋"
+    echo "  link:nvim    Neovim (LazyVim) 설정 리셋"
     echo "  help         도움말 출력"
     echo ""
 }
@@ -120,6 +121,7 @@ install_cli_tools() {
         "eza"
         "lazygit"
         "btop"
+        "neovim"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do
@@ -218,6 +220,17 @@ link_claude() {
     fi
 }
 
+link_nvim() {
+    echo "[link] Neovim (LazyVim) 설정 리셋 중..."
+    if [ -d "$PREFS_DIR/nvim" ]; then
+        rm -rf ~/.config/nvim
+        ln -sf "$PREFS_DIR/nvim" ~/.config/nvim
+        echo "  ✓ Neovim 설정 링크됨"
+    else
+        echo "  ⚠ Neovim 설정 폴더를 찾을 수 없습니다"
+    fi
+}
+
 # 전체 설정 파일 링크
 link_configs() {
     echo "[link] 전체 설정 파일 링크 중..."
@@ -226,6 +239,7 @@ link_configs() {
     link_ideavim
     link_zshrc
     link_claude
+    link_nvim
 }
 
 # 설정 파일 링크 서브메뉴
@@ -238,7 +252,8 @@ show_link_menu() {
     echo "  3) ideaVim 설정 리셋"
     echo "  4) tmux 설정 리셋"
     echo "  5) Claude 설정 리셋"
-    echo "  6) 전체 설정 링크"
+    echo "  6) Neovim (LazyVim) 설정 리셋"
+    echo "  7) 전체 설정 링크"
     echo "  b) 뒤로 가기"
     echo ""
     read -p "선택: " link_choice
@@ -249,7 +264,8 @@ show_link_menu() {
         3) link_ideavim ;;
         4) link_tmux ;;
         5) link_claude ;;
-        6) link_configs ;;
+        6) link_nvim ;;
+        7) link_configs ;;
         b|B) return ;;
         *) echo "잘못된 선택입니다." ;;
     esac
@@ -340,6 +356,9 @@ else
             ;;
         link:claude)
             link_claude
+            ;;
+        link:nvim)
+            link_nvim
             ;;
         help|--help|-h)
             show_usage
