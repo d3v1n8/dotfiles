@@ -122,6 +122,8 @@ install_cli_tools() {
         "lazygit"
         "btop"
         "neovim"
+        "fd"
+        "ripgrep"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do
