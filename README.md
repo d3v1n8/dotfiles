@@ -8,7 +8,7 @@ macOS 초기 설정 자동화 스크립트
 - iTerm2, Google Chrome, Discord, Slack, Zoom, Figma, Claude, TopNotch
 
 ### CLI 도구 (brew)
-- tmux, powerlevel10k, bat, zsh-autosuggestions, fzf
+- tmux, powerlevel10k, bat, zsh-autosuggestions, fzf, btop
 
 ### 설정 파일
 - `preferences/zsh/` - zsh, powerlevel10k 설정

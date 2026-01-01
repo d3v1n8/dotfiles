@@ -119,6 +119,7 @@ install_cli_tools() {
         "zoxide"
         "eza"
         "lazygit"
+        "btop"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do
