@@ -18,6 +18,8 @@ return {
         "emmet-ls",
         -- JSON
         "json-lsp",
+        -- Linters
+        "eslint-lsp",
         -- Formatters
         "prettier",
         "stylua",
@@ -30,7 +32,23 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        ts_ls = {},
+        ts_ls = {
+          -- Enable checkJs for JavaScript diagnostics
+          init_options = {
+            preferences = {
+              includeInlayParameterNameHints = "all",
+            },
+          },
+          settings = {
+            javascript = {
+              suggestionActions = { enabled = true },
+            },
+            implicitProjectConfiguration = {
+              checkJs = true,
+            },
+          },
+        },
+        eslint = {},
         pyright = {},
         kotlin_language_server = {},
         jdtls = {},
