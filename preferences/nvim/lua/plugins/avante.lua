@@ -18,12 +18,17 @@ return {
     },
     opts = {
       provider = "gemini",
-      vendors = {
+      providers = {
         gemini = {
-          __inherited_from = "openai",
           api_key_name = "GEMINI_API_KEY",
-          endpoint = "https://generativelanguage.googleapis.com/v1beta",
+          endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
           model = "gemini-1.5-flash",
+          timeout = 30000,
+          extra_request_body = {
+            generationConfig = {
+              temperature = 0.7,
+            },
+          },
         },
       },
     },
