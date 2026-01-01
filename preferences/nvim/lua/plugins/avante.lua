@@ -18,10 +18,13 @@ return {
     },
     opts = {
       provider = "gemini",
-      gemini = {
-        endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-        model = "gemini-1.5-flash",
-        max_tokens = 4096,
+      vendors = {
+        gemini = {
+          __inherited_from = "openai",
+          api_key_name = "GEMINI_API_KEY",
+          endpoint = "https://generativelanguage.googleapis.com/v1beta",
+          model = "gemini-1.5-flash",
+        },
       },
     },
   },
