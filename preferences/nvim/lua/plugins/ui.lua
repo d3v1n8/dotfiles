@@ -8,4 +8,20 @@ return {
       },
     },
   },
+
+  -- Kanagawa theme
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+
+  -- Set default colorscheme
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "kanagawa",
+    },
+  },
 }
