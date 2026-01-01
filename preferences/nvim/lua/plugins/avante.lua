@@ -17,10 +17,10 @@ return {
       },
     },
     opts = {
-      provider = "claude",
-      claude = {
-        endpoint = "https://api.anthropic.com",
-        model = "claude-sonnet-4-20250514",
+      provider = "gemini",
+      gemini = {
+        endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
+        model = "gemini-1.5-flash",
         max_tokens = 4096,
       },
     },
