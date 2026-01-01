@@ -12,6 +12,12 @@ return {
         "kotlin-language-server",
         -- Java
         "jdtls",
+        -- HTML/CSS
+        "html-lsp",
+        "css-lsp",
+        "emmet-ls",
+        -- JSON
+        "json-lsp",
         -- Formatters
         "prettier",
         "stylua",
@@ -28,6 +34,10 @@ return {
         pyright = {},
         kotlin_language_server = {},
         jdtls = {},
+        html = {},
+        cssls = {},
+        emmet_ls = {},
+        jsonls = {},
       },
     },
   },
