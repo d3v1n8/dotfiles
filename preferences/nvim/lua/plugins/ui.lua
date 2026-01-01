@@ -9,19 +9,21 @@ return {
     },
   },
 
-  -- Kanagawa theme
+  -- Onedark theme
   {
-    "rebelot/kanagawa.nvim",
+    "navarasu/onedark.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
+    opts = {
+      style = "dark", -- dark, darker, cool, deep, warm, warmer
+    },
   },
 
   -- Set default colorscheme
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "onedark",
     },
   },
 }
