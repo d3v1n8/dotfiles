@@ -1,7 +1,7 @@
 return {
   -- Mason: ensure LSP servers are installed
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         -- TypeScript/JavaScript
