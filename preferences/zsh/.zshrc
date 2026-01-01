@@ -71,3 +71,6 @@ export PATH="/Users/hunwooha/.rd/bin:$PATH"
 
 # Created by `pipx` on 2025-12-31 05:44:50
 export PATH="$PATH:/Users/hunwooha/.local/bin"
+
+# Load local secrets (API keys, etc.)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
