@@ -5,6 +5,6 @@
 -- Ctrl+e: Neo-tree focus/toggle
 vim.keymap.set("n", "<C-e>", "<cmd>Neotree focus<cr>", { desc = "Focus Neo-tree" })
 
--- Option+Arrow: Buffer navigation
-vim.keymap.set("n", "<A-Left>", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
-vim.keymap.set("n", "<A-Right>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+-- Option+h/l: Buffer navigation
+vim.keymap.set("n", "<A-h>", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
+vim.keymap.set("n", "<A-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
